@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Novo Depoimento Submetido</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: #374151;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 30px;
+      border-radius: 8px 8px 0 0;
+      text-align: center;
+    }
+    .content {
+      background: #ffffff;
+      padding: 30px;
+      border: 1px solid #e5e7eb;
+      border-top: none;
+    }
+    .testimonial-card {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    .author-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+    .author-details h3 {
+      margin: 0;
+      color: #1f2937;
+    }
+    .author-details p {
+      margin: 5px 0 0 0;
+      color: #6b7280;
+      font-size: 14px;
+    }
+    .testimonial-text {
+      font-style: italic;
+      color: #374151;
+      margin-bottom: 15px;
+    }
+    .rating {
+      color: #fbbf24;
+    }
+    .actions {
+      background: #f3f4f6;
+      padding: 20px;
+      border-radius: 0 0 8px 8px;
+      text-align: center;
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      margin: 0 10px;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      text-align: center;
+    }
+    .btn-primary {
+      background: #3b82f6;
+      color: white;
+    }
+    .btn-secondary {
+      background: #6b7280;
+      color: white;
+    }
+    .footer {
+      text-align: center;
+      padding: 20px;
+      color: #6b7280;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>🎉 Novo Depoimento Recebido!</h1>
+    <p>Um cliente compartilhou sua experiência com o Chatwoot</p>
+  </div>
+
+  <div class="content">
+    <p>Olá,</p>
+    
+    <p>Um novo depoimento foi submetido e está aguardando sua aprovação:</p>
+
+    <div class="testimonial-card">
+      <div class="author-info">
+        <div class="author-details">
+          <h3><%= @testimonial.name %></h3>
+          <% if @testimonial.position.present? || @testimonial.company.present? %>
+            <p>
+              <%= @testimonial.position %>
+              <%= " at #{@testimonial.company}" if @testimonial.company.present? %>
+            </p>
+          <% end %>
+          <% if @testimonial.email.present? %>
+            <p>📧 <%= @testimonial.email %></p>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="testimonial-text">
+        "<%= @testimonial.text %>"
+      </div>
+
+      <% if @testimonial.rating.present? %>
+        <div class="rating">
+          <strong>Avaliação:</strong>
+          <%= "⭐" * @testimonial.rating %> (<%= @testimonial.rating %>/5)
+        </div>
+      <% end %>
+
+      <% if @testimonial.category.present? %>
+        <p><strong>Categoria:</strong> <%= @testimonial.category.humanize %></p>
+      <% end %>
+
+      <% if @testimonial.industry.present? %>
+        <p><strong>Setor:</strong> <%= @testimonial.industry.humanize %></p>
+      <% end %>
+
+      <p><strong>Submetido em:</strong> <%= @testimonial.created_at.strftime("%d/%m/%Y às %H:%M") %></p>
+    </div>
+
+    <p>Este depoimento precisa ser aprovado antes de aparecer publicamente no site.</p>
+  </div>
+
+  <div class="actions">
+    <a href="<%= ENV.fetch('FRONTEND_URL', 'https://app.chatwoot.com') %>/app/accounts/<%= Current.account&.id %>/settings/testimonials/<%= @testimonial.id %>" class="btn btn-primary">
+      ✅ Revisar e Aprovar
+    </a>
+    
+    <a href="<%= ENV.fetch('FRONTEND_URL', 'https://app.chatwoot.com') %>/app/accounts/<%= Current.account&.id %>/settings/testimonials" class="btn btn-secondary">
+      📋 Ver Todos os Depoimentos
+    </a>
+  </div>
+
+  <div class="footer">
+    <p>
+      Esta é uma notificação automática do sistema Chatwoot.<br>
+      Para alterar suas preferências de notificação, acesse as configurações da sua conta.
+    </p>
+  </div>
+</body>
+</html>
+

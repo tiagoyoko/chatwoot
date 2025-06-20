@@ -267,6 +267,23 @@ Rails.application.routes.draw do
             end
           end
 
+          # Testimonials routes
+          resources :testimonials do
+            member do
+              post :approve
+              post :disapprove
+              post :toggle_active
+            end
+            collection do
+              get :public_index
+              get :featured
+              get :random
+              post :bulk_approve
+              post :submit
+            end
+          end
+          get 'testimonials/by_category/:category', to: 'testimonials#by_category'
+
           resources :upload, only: [:create]
         end
       end

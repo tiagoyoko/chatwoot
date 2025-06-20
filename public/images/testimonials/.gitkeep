@@ -1,0 +1,12 @@
+# Diretório para imagens de depoimentos
+# 
+# Estrutura recomendada:
+# - avatars/: Fotos dos clientes
+# - logos/: Logos das empresas
+# - default-avatar.png: Avatar padrão
+#
+# Formatos suportados: PNG, JPG, WebP
+# Tamanhos recomendados:
+# - Avatares: 96x96px (mínimo 48x48px)
+# - Logos: 40x40px (máximo 80x80px)
+
