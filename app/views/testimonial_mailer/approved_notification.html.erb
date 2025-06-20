@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Seu Depoimento Foi Aprovado!</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: #374151;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .header {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: white;
+      padding: 30px;
+      border-radius: 8px 8px 0 0;
+      text-align: center;
+    }
+    .content {
+      background: #ffffff;
+      padding: 30px;
+      border: 1px solid #e5e7eb;
+      border-top: none;
+    }
+    .testimonial-preview {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    .share-section {
+      background: #f3f4f6;
+      padding: 20px;
+      border-radius: 0 0 8px 8px;
+      text-align: center;
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      margin: 0 10px;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      text-align: center;
+    }
+    .btn-primary {
+      background: #3b82f6;
+      color: white;
+    }
+    .social-links {
+      margin-top: 20px;
+    }
+    .social-links a {
+      display: inline-block;
+      margin: 0 10px;
+      padding: 10px;
+      background: #374151;
+      color: white;
+      text-decoration: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      text-align: center;
+      line-height: 20px;
+    }
+    .footer {
+      text-align: center;
+      padding: 20px;
+      color: #6b7280;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>🎉 Parabéns!</h1>
+    <p>Seu depoimento foi aprovado e já está no ar!</p>
+  </div>
+
+  <div class="content">
+    <p>Olá <%= @testimonial.name %>,</p>
+    
+    <p>Temos uma ótima notícia! Seu depoimento sobre o Chatwoot foi aprovado e já está sendo exibido em nosso site.</p>
+
+    <p>Agradecemos muito por compartilhar sua experiência conosco. Depoimentos como o seu ajudam outras empresas a descobrir como o Chatwoot pode transformar seu atendimento ao cliente.</p>
+
+    <div class="testimonial-preview">
+      <h3>Seu depoimento:</h3>
+      <blockquote style="font-style: italic; margin: 15px 0; color: #374151;">
+        "<%= @testimonial.text %>"
+      </blockquote>
+      <p style="text-align: right; color: #6b7280; margin: 0;">
+        — <%= @testimonial.name %>
+        <% if @testimonial.position.present? || @testimonial.company.present? %>
+          <br><%= @testimonial.position %>
+          <%= " at #{@testimonial.company}" if @testimonial.company.present? %>
+        <% end %>
+      </p>
+    </div>
+
+    <p>Seu depoimento está ajudando outras empresas a conhecer os benefícios do Chatwoot. Obrigado por fazer parte da nossa comunidade!</p>
+  </div>
+
+  <div class="share-section">
+    <h3>Compartilhe com sua rede!</h3>
+    <p>Que tal compartilhar sua experiência positiva com seus colegas e contatos?</p>
+    
+    <a href="<%= ENV.fetch('FRONTEND_URL', 'https://chatwoot.com') %>/testimonials" class="btn btn-primary">
+      🌟 Ver Seu Depoimento no Site
+    </a>
+
+    <div class="social-links">
+      <a href="https://twitter.com/intent/tweet?text=Acabei%20de%20compartilhar%20minha%20experiência%20com%20o%20@chatwoot!%20Uma%20plataforma%20incrível%20para%20atendimento%20ao%20cliente.&url=<%= ENV.fetch('FRONTEND_URL', 'https://chatwoot.com') %>/testimonials" target="_blank" title="Compartilhar no Twitter">
+        🐦
+      </a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=<%= ENV.fetch('FRONTEND_URL', 'https://chatwoot.com') %>/testimonials" target="_blank" title="Compartilhar no LinkedIn">
+        💼
+      </a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=<%= ENV.fetch('FRONTEND_URL', 'https://chatwoot.com') %>/testimonials" target="_blank" title="Compartilhar no Facebook">
+        📘
+      </a>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>
+      <strong>Chatwoot</strong><br>
+      Obrigado por escolher o Chatwoot para transformar seu atendimento ao cliente!
+    </p>
+    <p>
+      <a href="<%= ENV.fetch('FRONTEND_URL', 'https://chatwoot.com') %>">chatwoot.com</a> |
+      <a href="mailto:support@chatwoot.com">support@chatwoot.com</a>
+    </p>
+  </div>
+</body>
+</html>
+
